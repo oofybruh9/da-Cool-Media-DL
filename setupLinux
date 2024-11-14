@@ -1,0 +1,24 @@
+#! /bin/bash
+
+function yesno() {
+  answer=$(whiptail --yesno "$1" 0 0 3>&1 1>&2 2>&3; echo $?)
+  echo "Answer is $answer"
+}
+
+function yt-dlpSYS() {
+    arch=`uname -i`
+    if [$arch == "x86_64"]; then
+        echo '64 bit'
+    fi
+}
+
+echo ➜
+yesno "➜ Install system-wide?"
+
+
+if [$answer = 0]; then
+    echo yes
+    yt-dlpSYS
+else
+    echo no
+fi

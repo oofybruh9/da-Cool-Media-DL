@@ -1,0 +1,23 @@
+#! /bin/bash
+
+# python upgrade
+echo Verifying Python is a thing...
+
+python3 --version
+
+echo Upgrading pip
+
+python3 -m pip install --upgrade pip
+
+# installing the services
+echo installing yt-dlp
+
+pip install yt-dlp
+
+echo installing gallery-dl
+
+pip install gallery-dl
+
+
+# yay it finished!
+echo Finished! for now...
