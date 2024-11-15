@@ -1,0 +1,67 @@
+#! /bin/bash 
+
+function ytdlt(){
+  echo URL: 
+  read url
+
+  echo 'Format (mp4, webm, m4a for YT, other for other websites):'
+  read format
+  
+  echo Downloading...
+  if [$format == "mp4"]; then
+    echo format is mp4
+    yt-dlp -S res,vcodec:h264,acodec:m4a,ext $url
+  elif [$format == "webm"]; then
+    echo format is webm
+    yt-dlp $url
+  elif [$format == "m4a"]; then
+    echo format is m4a
+    yt-dlp -f m4a $url
+  else
+    yt-dlp $url
+  fi
+}
+
+function gallerydlt(){
+  echo URL : 
+  read gdlURL
+  gallery-dl $gdlURL
+}
+
+
+function maintxt(){
+    echo 'yt-dlp or gallery-dl'
+    read dl
+    if [$dl == "yt-dlp"]; then
+      echo yt-dlp it is!
+      ytdlt
+    else
+      echo gallery-dl it is!
+      gallerydlt
+    fi
+}
+
+read dialog <<< "$(which whiptail dialog 2> /dev/null)"
+
+function mainGUI(){
+  if [$dialog == ""]
+}
+
+# exit if none found
+[[ "$dialog" ]] || {
+  echo 'neither whiptail nor dialog found. Resorting to a CLI.' >&2 
+  maintxt
+}
+
+if [$dialog == "bash: dialog:"]; then
+  echo using whiptail
+  message="whiptail"
+elif [$dialog == "bash: whiptail:"]; then
+  echo using dialog
+  message="dialog"
+else
+  echo using ds
+fi
+
+# just use whichever was found
+"$dialog" --msgbox "Message displayed with $dialog" 0 0
