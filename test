@@ -1,0 +1,15 @@
+#!/bin/bash
+
+(
+    items=123
+    processed=0
+    while [ $processed -le $items ]; do
+        pct=$(( $processed * 100 / $items ))
+        echo "XXX"
+        echo "Processing item $processed"
+        echo "XXX"
+        echo "$pct"
+        processed=$((processed+1))
+        sleep 0.1
+    done
+) | dialog --title "Gauge" --gauge "Wait please..." 10 60 0

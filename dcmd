@@ -1,10 +1,11 @@
 #! /bin/bash 
 
+# text cli
 function ytdlt(){
   echo URL: 
   read url
 
-  echo 'Format (mp4, webm, m4a for YT, other for other websites):'
+  echo 'Format (mp4, webm, m4a for YT, default for other websites):'
   read format
   
   echo Downloading...
@@ -41,9 +42,68 @@ function maintxt(){
     fi
 }
 
+# Dialog use
+
+function gallerydld() {
+  read gdURL <<< $(dialog --stdout --inputbox "URL" 0 0 "URL" 2>&1 1>&3)
+  gallery-dl $gdURL
+}
+
+function ytdld(){
+  read uRl <<< $(dialog --stdout --inputbox "URL" 0 0 "url" 2>&1 1>&3)
+  read format <<< $(dialog --stdout --menu "Format (mp4/webm/m4a/default)" 0 0 0 1 "mp4" 2 "webm" 3 "m4a" 4 "default" 2>&1 1>&3)
+  if [[ $format == "1" ]];then
+    yt-dlp -S res,vcodec:h264,acodec:m4a,ext $uRl
+  elif [[ $format == "2" ]]; then
+    yt-dlp $uRl
+  elif [[ $format == "3" ]]; then
+    yt-dlp -f m4a $uRl
+  else
+    yt-dlp $uRl
+  fi
+}
+
 function mainD(){
-  read opt <<< '$(dialog --stdout --menu "yt-dlp or gallery-dl" 0 0 0 1 "yt-dlp" 2 "gallery-dl" 2>&1 1>&3)'
-  echo `$opt`
+  read opt <<< $(dialog --stdout --menu "yt-dlp or gallery-dl" 0 0 0 1 "yt-dlp" 2 "gallery-dl" 2>&1 1>&3)
+  if [[ $opt == "1" ]];then
+    dialog --msgbox "yt-dlp it is!" 0 0
+    ytdld
+  else
+    dialog --msgbox "gallery-dl it is!" 0 0
+    gallerydld
+  fi
+}
+
+# Whiptail use
+
+function ytdlw() {
+  read UrL <<< $(whiptail --inputbox "URL" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3) "url" 3>&1 1>&2 2>&3)
+  read fmt <<< $(whiptai; --menu "Format (mp4/webm/m4a/default)" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3) 0 1 "mp4" 2 "webm" 3 "m4a" 4 "default" 3>&1 1>&2 2>&3)
+  if [[ $fmt == "1" ]];then
+    yt-dlp -S res,vcodec:h264,acodec:m4a,ext $UrL
+  elif [[ $fmt == "2" ]];then
+    yt-dlp $UrL
+  elif [[ $fmt == "3" ]];then
+    yt-dlp -f m4a $UrL
+  else
+    yt-dlp $UrL
+  fi
+}
+
+function gallerydlw() {
+  read gdURL <<< $(whiptail --inputbox "URL" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3) "URL" 3>&1 1>&2 2>&3)
+  gallery-dl $gdURL
+}
+
+function mainW(){
+  read to <<< $(whiptail --menu "yt-dlp or gallery-dl" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3) 0 1 "yt-dlp" 2 "gallery-dl" 3>&1 1>&2 2>&3)
+  if [[ $to == "1" ]];then
+    whiptail --msgbox "yt-dlp it is!" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3)
+    ytdlw
+  else
+    whiptail --msgbox "gallery-dl it is!" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3)
+    gallerydlw
+  fi
 }
 
 echo main
@@ -57,7 +117,7 @@ if [[ "$dialog" == "dialog:" && "$whiptail" == "whiptail:" ]]; then
 elif [[ $dialog == "dialog:" ]]; then
   echo mainW
   mainW
-elif [[ $whiptail ==  "whiptail:" ]]; then
+else
   echo mainD
   mainD
 fi
