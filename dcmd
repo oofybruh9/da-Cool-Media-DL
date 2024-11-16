@@ -43,9 +43,6 @@ function maintxt(){
 
 read dialog <<< "$(which whiptail dialog 2> /dev/null)"
 
-function mainGUI(){
-  if [$dialog == ""]
-}
 
 # exit if none found
 [[ "$dialog" ]] || {
