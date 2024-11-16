@@ -41,23 +41,23 @@ function maintxt(){
     fi
 }
 
-read dialog <<< "$(which whiptail dialog 2> /dev/null)"
-
-
-# exit if none found
-[[ "$dialog" ]] || {
-  echo 'neither whiptail nor dialog found. Resorting to a CLI.' >&2 
-  maintxt
+function mainD(){
+  read opt <<< '$(dialog --stdout --menu "yt-dlp or gallery-dl" 0 0 0 1 "yt-dlp" 2 "gallery-dl" 2>&1 1>&3)'
+  echo `$opt`
 }
 
-if ['$dialog' == "bash: dialog:"]; then
-  echo using whiptail
-  message="whiptail"
-elif ['$dialog' == "bash: whiptail:"]; then
-  echo using dialog
-  message="dialog"
-else
-  echo using dialog bc its better
-fi
+echo main
+read dialog <<< "$(which dialog 2> /dev/null)"
+read whiptail <<< "$(which whiptail 2> /dev/null)"
 
-# just use whichever was found
+echo if
+if [[ "$dialog" == "dialog:" && "$whiptail" == "whiptail:" ]]; then
+  echo 'neither whiptail nor dialog found. Resorting to a CLI.'
+  maintxt
+elif [[ $dialog == "dialog:" ]]; then
+  echo mainW
+  mainW
+elif [[ $whiptail ==  "whiptail:" ]]; then
+  echo mainD
+  mainD
+fi
