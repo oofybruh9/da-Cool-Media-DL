@@ -50,15 +50,14 @@ read dialog <<< "$(which whiptail dialog 2> /dev/null)"
   maintxt
 }
 
-if [$dialog == "bash: dialog:"]; then
+if ['$dialog' == "bash: dialog:"]; then
   echo using whiptail
   message="whiptail"
-elif [$dialog == "bash: whiptail:"]; then
+elif ['$dialog' == "bash: whiptail:"]; then
   echo using dialog
   message="dialog"
 else
-  echo using ds
+  echo using dialog bc its better
 fi
 
 # just use whichever was found
-"$dialog" --msgbox "Message displayed with $dialog" 0 0
