@@ -2,7 +2,10 @@
 
 Da Cool Media Downloader (or DCMD) is a helpful script that guides you through the downloading process without having to remember commands to download your content.
 
-There are better options out there with full-on GUI's but I made this for personal needs and thought I might just share it to the world. :)
+There are better options out there with full-on GUI's but I made this for personal needs and thought I might just share it to the world. ( ͡° ͜ʖ ͡°)
+
+> **DO NOT FORK THIS AND CHANGE THE NAME**  
+> this will cause the script to mess up in some parts. Just fork it and that's it. Don't change ***A THING*** >:(
 
 ## Setup
 

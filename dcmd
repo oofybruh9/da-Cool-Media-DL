@@ -121,10 +121,10 @@ read dialog <<< "$(which dialog 2> /dev/null)"
 read whiptail <<< "$(which whiptail 2> /dev/null)"
 
 echo if
-if [[ "$dialog" == "dialog:" && "$whiptail" == "whiptail:" ]]; then
+if [[ "$dialog" != "/usr/bin/dialog" && "$whiptail" != "/usr/bin/whiptail" ]]; then
   echo 'neither whiptail nor dialog found. Resorting to a CLI.'
   maintxt
-elif [[ $dialog == "dialog:" ]]; then
+elif [[ $dialog != "/usr/bin/dialog" ]]; then
   echo mainW
   mainW
 else

@@ -9,4 +9,4 @@ REM Da Cool Media Downloader is distributed in the hope that it will be useful, 
 REM You should have received a copy of the GNU General Public License along with Da Cool Media Downloader. If not, see <https://www.gnu.org/licenses/>.
 
 
-echo cool
+py -m pip install
