@@ -2,37 +2,19 @@
 
 Da Cool Media Downloader (or DCMD) is a helpful script that guides you through the downloading process without having to remember commands to download your content.
 
-There are better options out there with full-on GUI's but I made this for personal needs and thought I might just share it to the world. ( ͡° ͜ʖ ͡°)
-
-> **DO NOT FORK THIS AND CHANGE THE NAME**  
-> this will cause the script to mess up in some parts. Just fork it and that's it. Don't change ***A THING*** >:(
+There are better options out there with full-on GUI's but I made this to download videos via codespaces.  
 
 ## Setup
 
-To setup your codespace or to run on a computer without yt-dlp and gallery-dl, I provide helpful installers.  
+To setup your codespace or to run on a computer without yt-dlp and gallery-dl, I provide helpful installers that install these dependencies.  
 
-### TUI
+### Dependencies
 
-If you want a clean TUI (Text User Interface) on Linux, check if you either have whiptail or dialog installed. Use this script to check if you have these programs:
+You'll need
 
-``` bash
-which whiptail
-which dialog
-```
-
-If you get:
-
-``` bash
-/usr/bin/whiptail
-/usr/bin/dialog
-```
-
-You have both installed. No need to uninstall anything, it will automatically resort to dialog.  
-
-If you have one missing, don’t panic. DCMD will automatically choose the one avaliable.  
-
-If you get nothing, DCMD will automatically resort to a text based option.
-
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+- [gallery-dl](https://github.com/mikf/gallery-dl)
+- [whiptail](https://manpages.debian.org/bookworm/whiptail/whiptail.1.en.html) and/or [dialog](https://en.wikipedia.org/wiki/Dialog_(software))
 ### Codespaces
 
 You need to run `setupCodespaces` to install all necessary stuff. You may need to `chmod +x setupCodespaces`
@@ -44,6 +26,10 @@ Run command `setupLinux` to install. You may need to `chmod +x setupLinux`
 ### Windows
 
 Run `setupWin.bat`. EZ :)
+
+### macOS
+
+Run `setupMacOS`. You may need to `chmod +x setupMacOS`
 
 ## Usage
 
