@@ -1,6 +1,6 @@
 #! /bin/bash
 
-:'
+: '
 This file is part of Da Cool Media Downloader.
 
 Da Cool Media Downloader is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -28,13 +28,17 @@ echo installing gallery-dl
 
 pip install gallery-dl
 
+echo installing pytube
+
+pip install pytube
+
 echo setting up configs
 
 touch ~/gallery-dl.conf
 touch ~/yt-dlp.conf
 
 ln -s ~/yt-dlp.conf /workspaces/da-Cool-Media-DL/yt-dlp.conf
-ln -s ~/gallery-dl.conf /workspaces/da-Cool-Media-Dl/gallery-dl.conf
+ln -s ~/gallery-dl.conf /workspaces/da-Cool-Media-DL//gallery-dl.conf
 
 # ffmpeg for 1080p or higher
 
