@@ -41,15 +41,17 @@ function gallerydlt(){
 
 
 function maintxt(){
-    echo 'yt-dlp or gallery-dl'
-    read dl
-    if [$dl == "yt-dlp"]; then
-      echo yt-dlp it is!
-      ytdlt
-    else
-      echo gallery-dl it is!
-      gallerydlt
-    fi
+echo 'yt-dlp or gallery-dl (or exit)'
+read dl
+if [$dl == "yt-dlp"]; then
+  echo yt-dlp it is!
+  ytdlt
+elif [[$dl == "gallery-dl"]];then
+  echo gallery-dl it is!
+  gallerydlt
+else
+  exit 1
+fi
 }
 
 # Dialog use
@@ -78,9 +80,11 @@ function mainD(){
   if [[ $opt == "1" ]];then
     dialog --msgbox "yt-dlp it is!" 0 0
     ytdld
-  else
+  elif [[ $opt == "2" ]];then
     dialog --msgbox "gallery-dl it is!" 0 0
     gallerydld
+  else
+  exit 1
   fi
 }
 
@@ -110,12 +114,32 @@ function mainW(){
   if [[ $to == "1" ]];then
     whiptail --msgbox "yt-dlp it is!" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3)
     ytdlw
-  else
+  elif [[ $to == "2" ]];then
     whiptail --msgbox "gallery-dl it is!" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3)
     gallerydlw
+  else
+  exit 1
   fi
 }
 
+function helptxt(){
+  echo "dcmd (c) 2024 oofybruh9. Licensed under GPLv3"
+  echo 
+  echo "Usage dcmd [-h][--help][-y][-g][-ee][-u][-f] (parameters are optional):"
+  echo "  -h --help     Print help and exit"
+  echo "  -y            Use yt-dlp and only prompt other stuff"
+  echo "  -g            Use gallery-dl and only prompt URL"
+  echo "  -u -URL       Use URL prompted (requires -y or -g flag)"
+  echo "  -f            Add flags to the downloader (requires -y or -g flag)"
+  echo "  -ee           ë̴̠̫́̓͠x̵̠̞̓͊͜͝e̸̻̺͕͋͐͠c̴͔͉͍̒͆̚u̵̼͖̪͆͐̿t̵̞͚̟̔͒͠e̸̡͙̘̾͝͝ i̴͓͚͑̈́͝t̵͖̝͙̔͑͝ t̸̡͓̝̾͛͋o̴̪͓̠͌̕ f̸͉̞̟͆̚͝ḯ̸̙̘̾͊n̴̢̠͖̐̈́͋d̵͓͉̀̾̈́ o̵̘͎̔͜͝͠u̸͚͉͖̓͛̔t̴̡͖͇͋́͝…̸̡̘̦̈́͊"
+}
+
+if [[$1 == "-h" || "--help"]];then
+  helptxt
+  sleep 1
+  exit 1
+  break
+else
 echo main
 read dialog <<< "$(which dialog 2> /dev/null)"
 read whiptail <<< "$(which whiptail 2> /dev/null)"
@@ -130,4 +154,5 @@ elif [[ $dialog != "/usr/bin/dialog" ]]; then
 else
   echo mainD
   mainD
+fi
 fi

@@ -15,7 +15,6 @@ You'll need
 - [python](https://python.org)
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 - [gallery-dl](https://github.com/mikf/gallery-dl)
-- [pytube](https://github.com/pytube/pytube) (For Quality Selection)
 - [whiptail](https://manpages.debian.org/bookworm/whiptail/whiptail.1.en.html) and/or [dialog](https://en.wikipedia.org/wiki/Dialog_(software))
 
 ### Codespaces
