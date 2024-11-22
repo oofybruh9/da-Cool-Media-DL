@@ -16,10 +16,10 @@ function yesno() {
 }
 
 function yt-dlpSYS() {
-    arch=`uname -i`
-    if [[ $arch == "x86_64" ]]; then
+    arch=`uname -m`
+    if [[ $arch == "x86_64" || "x64" || "arm64" || "mipsel" || "ppc64" || "s930x"]]; then
         echo '64 bit'
-    fi
+    elif [[ $arch == "ia32" ||]]
 }
 
 echo ➜
