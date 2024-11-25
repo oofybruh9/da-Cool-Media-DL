@@ -115,10 +115,10 @@ function mainW(){
     whiptail --msgbox "yt-dlp it is!" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3)
     ytdlw
   elif [[ $to == "2" ]];then
-    whiptail --msgbox "gallery-dl it is!" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3)
     gallerydlw
-  else
+    whiptail --msgbox "gallery-dl it is!" $(stty -a | tr \; \\012 |egrep 'rows|columns' | cut '-d ' -f3)
   exit 1
+  else
   fi
 }
 
